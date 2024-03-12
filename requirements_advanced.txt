@@ -1,0 +1,12 @@
+transformers
+huggingface_hub
+torch
+cpm-kernels
+sentence_transformers
+accelerate
+sentencepiece
+llama-cpp-python
+transformers_stream_generator
+einops
+optimum
+auto-gptq
