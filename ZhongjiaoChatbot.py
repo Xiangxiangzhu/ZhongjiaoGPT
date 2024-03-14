@@ -43,7 +43,6 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
     # 创建一个隐藏的登出按钮。这可能用于触发登出逻辑，但默认不在界面上显示。
     logout_hidden_btn = gr.LogoutButton(visible=False)
     # 创建一个状态组件，用于存储模板数据
-    a = get_template_names()
     promptTemplates = gr.State(load_template(get_template_names()[0], mode=2))
     # 创建一个用于存储用户问题的状态组件。初始值为空字符串。
     user_question = gr.State("")
