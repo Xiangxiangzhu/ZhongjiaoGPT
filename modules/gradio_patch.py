@@ -12,6 +12,8 @@ OAUTH_CLIENT_ID = os.environ.get("OAUTH_CLIENT_ID")
 OAUTH_CLIENT_SECRET = os.environ.get("OAUTH_CLIENT_SECRET")
 OAUTH_SCOPES = os.environ.get("OAUTH_SCOPES")
 OPENID_PROVIDER_URL = os.environ.get("OPENID_PROVIDER_URL")
+
+
 def _add_oauth_routes(app: fastapi.FastAPI) -> None:
     """Add OAuth routes to the FastAPI app (login, callback handler and logout)."""
     try:

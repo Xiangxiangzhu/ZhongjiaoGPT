@@ -1,9 +1,9 @@
-
 from collections import namedtuple
 import os
 import gradio as gr
 
 from . import shared
+
 
 # with open("./assets/ChuanhuChat.js", "r", encoding="utf-8") as f, \
 #     open("./assets/external-scripts.js", "r", encoding="utf-8") as f1:
@@ -18,6 +18,7 @@ def get_html(filename):
             return file.read()
     return ""
 
+
 def webpath(fn):
     if fn.startswith(shared.assets_path):
         web_path = os.path.relpath(fn, shared.chuanhu_path).replace('\\', '/')
@@ -25,7 +26,9 @@ def webpath(fn):
         web_path = os.path.abspath(fn)
     return f'file={web_path}?{os.path.getmtime(fn)}'
 
+
 ScriptFile = namedtuple("ScriptFile", ["basedir", "filename", "path"])
+
 
 def javascript_html():
     head = ""
@@ -35,11 +38,13 @@ def javascript_html():
         head += f'<script type="module" src="{webpath(script.path)}"></script>\n'
     return head
 
+
 def css_html():
     head = ""
     for cssfile in list_scripts("stylesheet", ".css"):
         head += f'<link rel="stylesheet" property="stylesheet" href="{webpath(cssfile.path)}">'
     return head
+
 
 def list_scripts(scriptdirname, extension):
     scripts_list = []
@@ -47,7 +52,8 @@ def list_scripts(scriptdirname, extension):
     if os.path.exists(scripts_dir):
         for filename in sorted(os.listdir(scripts_dir)):
             scripts_list.append(ScriptFile(shared.assets_path, filename, os.path.join(scripts_dir, filename)))
-    scripts_list = [x for x in scripts_list if os.path.splitext(x.path)[1].lower() == extension and os.path.isfile(x.path)]
+    scripts_list = [x for x in scripts_list if
+                    os.path.splitext(x.path)[1].lower() == extension and os.path.isfile(x.path)]
     return scripts_list
 
 
@@ -56,7 +62,7 @@ def reload_javascript():
     js += '<script async type="module" src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>'
     js += '<script async type="module" src="https://spin.js.org/spin.umd.js"></script><link type="text/css" href="https://spin.js.org/spin.css" rel="stylesheet" />'
     js += '<script async src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />'
-    
+
     meta = """
         <meta name="apple-mobile-web-app-title" content="川虎 Chat">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -64,8 +70,8 @@ def reload_javascript():
         <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover'>
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="apple-touch-icon-precomposed" href="/file=web_assets/icon/mask-icon-512.png" crossorigin="use-credentials">
-        <link rel="apple-touch-icon" href="/file=web_assets/icon/mask-icon-512.png" crossorigin="use-credentials">
+        <link rel="apple-touch-icon-precomposed" href="/file=web_assets/icon/ZhongjiaoGPT.png" crossorigin="use-credentials">
+        <link rel="apple-touch-icon" href="/file=web_assets/icon/ZhongjiaoGPT.png" crossorigin="use-credentials">
         
         <link rel="manifest" href="/file=web_assets/manifest.json" crossorigin="use-credentials">
     """
@@ -80,5 +86,6 @@ def reload_javascript():
         return res
 
     gr.routes.templates.TemplateResponse = template_response
+
 
 GradioTemplateResponseOriginal = gr.routes.templates.TemplateResponse

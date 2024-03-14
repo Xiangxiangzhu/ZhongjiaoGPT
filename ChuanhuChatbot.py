@@ -37,10 +37,14 @@ def create_new_model():
 
 
 with gr.Blocks(theme=small_and_beautiful_theme) as demo:
+    # 创建一个文本输入框，初始不可见。这个可能用于接收用户的名称，但在界面加载时不直接展示。
     user_name = gr.Textbox("", visible=False)
     # 激活/logout路由
+    # 创建一个隐藏的登出按钮。这可能用于触发登出逻辑，但默认不在界面上显示。
     logout_hidden_btn = gr.LogoutButton(visible=False)
+    # 创建一个状态组件，用于存储模板数据
     promptTemplates = gr.State(load_template(get_template_names()[0], mode=2))
+    # 创建一个用于存储用户问题的状态组件。初始值为空字符串。
     user_question = gr.State("")
     assert type(my_api_key) == str
     user_api_key = gr.State(my_api_key)
@@ -48,10 +52,17 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
 
     topic = gr.State(i18n("未命名对话历史记录"))
 
+    # 创建几个行容器（Row），每个容器可以包含其他Gradio组件或者行为。`elem_id`参数为每行指定了一个元素ID，
+    # 可能用于CSS样式或JavaScript逻辑。
     with gr.Row(elem_id="chuanhu-header"):
         gr.HTML(get_html("header_title.html").format(
             app_title=CHUANHU_TITLE), elem_id="app-title")
         status_display = gr.Markdown(get_geoip, elem_id="status-display")
+
+    # 使用 HTML 组件来提供一个更新信息的显示区域。
+    # get_html("update.html").format(...) 与上面类似，加载一个包含更新信息的HTML模板，并通过 format 方法插入一些动态内容，
+    # 比如当前版本、版本发布时间和各种按钮（取消、更新、详情、好、关闭、立即重启）的文本，这些文本通过 i18n 函数来支持国际化。
+    # visible=check_update 控制这个组件的可见性，check_update 可能是一个函数或变量，用于判断是否应该显示更新信息。
     with gr.Row(elem_id="float-display"):
         user_info = gr.Markdown(
             value="getting user info...", elem_id="user-info")
@@ -440,8 +451,8 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
 
                     with gr.Tab(label=i18n("关于"), elem_id="about-tab"):
                         gr.Markdown(
-                            '<img alt="Chuanhu Chat logo" src="file=web_assets/icon/any-icon-512.png" style="max-width: 144px;">')
-                        gr.Markdown("# " + i18n("川虎Chat"))
+                            '<img alt="ZhongjiaoGPT logo" src="file=web_assets/icon/ZhongjiaoGPT.png" style="max-width: 144px;">')
+                        gr.Markdown("# " + i18n("道路交通设计大模型-中交GPT"))
                         gr.HTML(get_html("footer.html").format(
                             versions=versions_html()), elem_id="footer")
                         gr.Markdown(CHUANHU_DESCRIPTION, elem_id="description")
@@ -512,8 +523,6 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                 historySelectBtn = gr.Button(
                     visible=False, elem_classes="invisible-btn", elem_id="history-select-btn")  # Not used
 
-
-    # https://github.com/gradio-app/gradio/pull/3296
 
     def create_greeting(request: gr.Request):
         if hasattr(request, "username") and request.username:  # is not None or is not ""
@@ -798,19 +807,6 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
     default_btn.click(
         reset_default, [], [apihostTxt, proxyTxt, status_display], show_progress=True
     )
-    # changeAPIURLBtn.click(
-    #     change_api_host,
-    #     [apihostTxt],
-    #     [status_display],
-    #     show_progress=True,
-    # )
-    # changeProxyBtn.click(
-    #     change_proxy,
-    #     [proxyTxt],
-    #     [status_display],
-    #     show_progress=True,
-    # )
-    # checkUpdateBtn.click(fn=None, _js='manualCheckUpdate')
 
     # Invisible elements
     updateChuanhuBtn.click(
@@ -852,12 +848,13 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
         outputs=[],
         _js='self.location="/logout"'
     )
+
 # 默认开启本地服务器，默认可以直接从IP访问，默认不创建公开分享链接
-demo.title = i18n("中交GPT 🧭")
+demo.title = i18n("中交GPT")
 
 if __name__ == "__main__":
-    # reload_javascript()
-    # setup_wizard()
+    reload_javascript()
+    setup_wizard()
     demo.queue(concurrency_count=CONCURRENT_COUNT).launch(
         allowed_paths=["history", "web_assets"],
         blocked_paths=["config.json", "files", "models", "lora", "modules"],
@@ -865,6 +862,7 @@ if __name__ == "__main__":
         server_port=server_port,
         share=share,
         auth=auth_from_conf if authflag else None,
-        favicon_path="./web_assets/favicon.ico",
+        # favicon_path="./web_assets/favicon.ico",
+        favicon_path="./web_assets/icon/ZhongjiaoGPT.png",
         inbrowser=autobrowser and not dockerflag,  # 禁止在docker下开启inbrowser
     )

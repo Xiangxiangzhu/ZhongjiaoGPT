@@ -99,7 +99,7 @@ input[type="range"] {
     height: 4px;
     background: var(--input-background-fill);
     border-radius: 5px;
-    background-image: linear-gradient(var(--primary-500),var(--primary-500));
+    background-image: linear-gradient(var(--secondary-500),var(--secondary-600));
     background-size: 0% 100%;
     background-repeat: no-repeat;
 }
