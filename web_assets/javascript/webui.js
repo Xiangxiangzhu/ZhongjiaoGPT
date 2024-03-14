@@ -1,4 +1,3 @@
-
 function openSettingBox() {
     chuanhuPopup.classList.add('showBox');
     popupWrapper.classList.add('showBox');
@@ -47,7 +46,7 @@ function showMask(obj) {
         document.body.appendChild(mask);
         // mask.classList.add('transparent-mask');
     }
-    
+
 
     mask.addEventListener('click', () => {
         if (obj == "box") {
@@ -163,7 +162,7 @@ function adjustSide() {
             closeSide(menu);
             closeSide(toolbox);
         }
-    } else if (windowWidth > 768 && windowWidth < 1024 ) {
+    } else if (windowWidth > 768 && windowWidth < 1024) {
         shouldAutoClose = true;
         if (wantOpenToolbox) {
             if (wantOpenMenu) {
@@ -181,7 +180,7 @@ function adjustSide() {
                 closeSide(toolbox);
                 openSide(menu);
             }
-        } else if (!wantOpenMenu && !wantOpenToolbox){
+        } else if (!wantOpenMenu && !wantOpenToolbox) {
             closeSide(menu);
             closeSide(toolbox);
         }
@@ -210,18 +209,24 @@ function adjustMask() {
 
     if (windowWidth > 768) {
         sideMask.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-        setTimeout(() => {sideMask.style.display = 'none'; }, 100);
+        setTimeout(() => {
+            sideMask.style.display = 'none';
+        }, 100);
         return;
     }
     // if (windowWidth <= 768)
     if (menuOpening || toolboxOpening) {
         document.body.classList.add('popup-open');
         sideMask.style.display = 'block';
-        setTimeout(() => {sideMask.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';}, 200);
+        setTimeout(() => {
+            sideMask.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        }, 200);
         sideMask.classList.add('mask-blur');
     } else if (!menuOpening && !toolboxOpening) {
         sideMask.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-        setTimeout(() => {sideMask.style.display = 'none'; }, 100);
+        setTimeout(() => {
+            sideMask.style.display = 'none';
+        }, 100);
     }
 }
 
@@ -258,7 +263,7 @@ function checkChatMoreMask() {
     }
 }
 
-function showKnowledgeBase(){
+function showKnowledgeBase() {
     if (!toolboxOpening) {
         toolboxClick();
     }
@@ -269,13 +274,17 @@ function showKnowledgeBase(){
         knoledgeBaseAccordion.querySelector('.label-wrap')?.click();
     }
     // 将 knoledgeBase 滚动到可见区域
-    setTimeout(() => {knoledgeBaseAccordion.scrollIntoView({ behavior: "smooth"}); }, 100);
+    setTimeout(() => {
+        knoledgeBaseAccordion.scrollIntoView({behavior: "smooth"});
+    }, 100);
     letThisSparkle(knoledgeBase, 5000);
 }
 
 function letThisSparkle(element, sparkleTime = 3000) {
     element.classList.add('chuanhu-sparkle');
-    setTimeout(() => {element.classList.remove('chuanhu-sparkle');}, sparkleTime);
+    setTimeout(() => {
+        element.classList.remove('chuanhu-sparkle');
+    }, sparkleTime);
 }
 
 function switchToolBoxTab(tabIndex) {
@@ -324,7 +333,7 @@ function setHistroyPanel() {
 
 
 // function testTrain() {
-    
+
 //     trainBody.classList.toggle('hide-body');
 //     trainingBox.classList.remove('hideBox');
 

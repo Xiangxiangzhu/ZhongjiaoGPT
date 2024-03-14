@@ -5,8 +5,10 @@
     --chatbot-color-dark: #FFFFFF;
     --chatbot-background-color-light: #F3F3F3;
     --chatbot-background-color-dark: #121111;
-    --message-user-background-color-light: #95EC69;
-    --message-user-background-color-dark: #26B561;
+    /*--message-user-background-color-light: #95EC61;*/
+    --message-user-background-color-light: #C9E4F0;
+    /*--message-user-background-color-dark: #26B561;*/
+    --message-user-background-color-dark: #5F9EA0;
     --message-bot-background-color-light: #FFFFFF;
     --message-bot-background-color-dark: #2C2C2C;
     --switch-checkbox-color-light: #e5e7eb;

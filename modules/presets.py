@@ -23,7 +23,7 @@ COMPLETION_URL = "https://api.openai.com/v1/completions"
 BALANCE_API_URL = "https://api.openai.com/dashboard/billing/credit_grants"
 USAGE_API_URL = "https://api.openai.com/dashboard/billing/usage"
 HISTORY_DIR = Path("history")
-HISTORY_DIR = "history"
+# HISTORY_DIR = "history"
 TEMPLATES_DIR = "templates"
 
 # 错误信息
@@ -47,10 +47,10 @@ CONCURRENT_COUNT = 100  # 允许同时使用的用户数量
 SIM_K = 5
 INDEX_QUERY_TEMPRATURE = 1.0
 
-CHUANHU_TITLE = i18n("中交GPT 🧭")
+CHUANHU_TITLE = i18n("中交GPT")
 
 CHUANHU_DESCRIPTION = i18n(
-    "由Bilibili [土川虎虎虎](https://space.bilibili.com/29125536)、[明昭MZhao](https://space.bilibili.com/24807452) 和 [Keldos](https://github.com/Keldos-Li) 开发<br />访问川虎Chat的 [GitHub项目](https://github.com/GaiZhenbiao/ChuanhuChatGPT) 下载最新版脚本")
+    "由中交一公院 马小龙 孙铸 田赵明 研发<br />访问中交GPT的 [GitHub项目](https://github.com/) 下载最新版脚本")
 
 ONLINE_MODELS = [
     "GPT3.5 Turbo",
@@ -327,7 +327,8 @@ small_and_beautiful_theme = gr.themes.Soft(
         c300="#77DEA9",
         c400="#3FD086",
         c500="#02C160",
-        c600="#06AE56",
+        # c600="#06AE56",
+        c600="#00BFFF",
         c700="#05974E",
         c800="#057F45",
         c900="#04673D",
@@ -336,15 +337,15 @@ small_and_beautiful_theme = gr.themes.Soft(
     ),
     secondary_hue=gr.themes.Color(
         c50="#576b95",
-        c100="#576b95",
-        c200="#576b95",
-        c300="#576b95",
+        c100="#E3F0F7",
+        c200="#7EBCE2",
+        c300="#00BFFF",
         c400="#576b95",
-        c500="#576b95",
-        c600="#576b95",
+        c500="#5F9EA0",
+        c600="#7B68EE",
         c700="#576b95",
         c800="#576b95",
-        c900="#576b95",
+        c900="#5F9EA0",
         c950="#576b95",
     ),
     neutral_hue=gr.themes.Color(
@@ -365,25 +366,54 @@ small_and_beautiful_theme = gr.themes.Soft(
     ),
     radius_size=gr.themes.sizes.radius_sm,
 ).set(
-    # button_primary_background_fill="*primary_500",
-    button_primary_background_fill_dark="*primary_600",
-    # button_primary_background_fill_hover="*primary_400",
-    # button_primary_border_color="*primary_500",
-    button_primary_border_color_dark="*primary_600",
-    button_primary_text_color="white",
+    # # button_primary_background_fill="*primary_500",
+    # button_primary_background_fill_dark="*primary_600",
+    # # button_primary_background_fill_hover="*primary_400",
+    # # button_primary_border_color="*primary_500",
+    # button_primary_border_color_dark="*primary_600",
+    # button_primary_text_color="white",
+    # button_primary_text_color_dark="white",
+    # button_secondary_background_fill="*neutral_100",
+    # button_secondary_background_fill_hover="*neutral_50",
+    # button_secondary_background_fill_dark="*neutral_900",
+    # button_secondary_text_color="*neutral_800",
+    # button_secondary_text_color_dark="white",
+    # # background_fill_primary="#F7F7F7",
+    # # background_fill_primary_dark="#1F1F1F",
+    # # block_title_text_color="*primary_500",
+    # block_title_background_fill_dark="*primary_900",
+    # block_label_background_fill_dark="*primary_900",
+    # input_background_fill="#F6F6F6",
+    # # chatbot_code_background_color="*neutral_950",
+    # # gradio 会把这个几个chatbot打头的变量应用到其他md渲染的地方，鬼晓得怎么想的。。。
+    # chatbot_code_background_color_dark="*neutral_950",
+
+    # 颜色方案2
+
+    color_accent="*secondary_300",
+
+    block_title_background_fill="*secondary_100",
+    block_title_text_color="*secondary_200",
+    block_label_text_color="*secondary_200",
+    block_label_background_fill="*secondary_100",
+    button_primary_background_fill="*secondary_100",
+
+    button_primary_background_fill_hover="*secondary_200",
+    button_primary_background_fill_hover_dark="*secondary_900",
+    button_primary_text_color_hover="white",
+    button_primary_text_color_hover_dark="white",
+
+    button_primary_background_fill_dark="*secondary_900",
+    button_primary_border_color_dark="*secondary_900",
+    button_primary_text_color="*secondary_200",
     button_primary_text_color_dark="white",
     button_secondary_background_fill="*neutral_100",
     button_secondary_background_fill_hover="*neutral_50",
     button_secondary_background_fill_dark="*neutral_900",
     button_secondary_text_color="*neutral_800",
     button_secondary_text_color_dark="white",
-    # background_fill_primary="#F7F7F7",
-    # background_fill_primary_dark="#1F1F1F",
-    # block_title_text_color="*primary_500",
-    block_title_background_fill_dark="*primary_900",
-    block_label_background_fill_dark="*primary_900",
+    block_title_background_fill_dark="*secondary_900",
+    block_label_background_fill_dark="*secondary_900",
     input_background_fill="#F6F6F6",
-    # chatbot_code_background_color="*neutral_950",
-    # gradio 会把这个几个chatbot打头的变量应用到其他md渲染的地方，鬼晓得怎么想的。。。
     chatbot_code_background_color_dark="*neutral_950",
 )

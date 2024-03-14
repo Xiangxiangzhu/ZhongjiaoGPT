@@ -1,5 +1,3 @@
-
-
 function isImgUrl(url) {
     const imageExtensions = /\.(jpg|jpeg|png|gif|bmp|webp)$/i;
     if (url.startsWith('data:image/')) {
@@ -15,7 +13,7 @@ function isImgUrl(url) {
     return false;
 }
 
-function downloadHistory(gradioUsername, historyname, format=".json") {
+function downloadHistory(gradioUsername, historyname, format = ".json") {
     let fileUrl;
     if (gradioUsername === null || gradioUsername.trim() === "") {
         fileUrl = `/file=./history/${historyname}`;
@@ -69,7 +67,7 @@ function downloadFile(fileUrl, filename = "", format = "", retryTimeout = 200, m
 
     tryDownload();
 }
-    
+
 function statusDisplayMessage(message) {
     statusDisplayBlock = statusDisplay.querySelector("#status-display .md p");
     statusDisplayBlock.innerText = message;
@@ -86,7 +84,7 @@ function bindFancyBox() {
 }
 
 function rebootingChuanhu() {
-    reloadSpinner = new Spin.Spinner({color:'#06AE56',lines:9}).spin();
+    reloadSpinner = new Spin.Spinner({color: '#06AE56', lines: 9}).spin();
     pageInfo = document.createElement('div');
     pageInfo.appendChild(reloadSpinner.el);
     pageInfo.innerHTML += '<h1 style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%); color: lightgray; text-align: center; font-family: sans-serif;">Rebooting...</h1>'

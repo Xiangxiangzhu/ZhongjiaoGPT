@@ -104,7 +104,8 @@
     overflow: hidden;
 }
 .progress {
-    background-color: var(--block-title-background-fill);
+    /*background-color: var(--block-title-background-fill);#5FA7D2*/
+    background-color: #5FA7D2;
     height: 100%;
     border-radius: 10px;
     text-align: right;

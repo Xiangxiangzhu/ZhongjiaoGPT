@@ -285,7 +285,7 @@ def clip_rawtext(chat_message, need_escape=True):
 
 def convert_bot_before_marked(chat_message):
     """
-    转换机器人发送的消息，使其在被marked.js处理之前适应Markdown格式，同时防止误将缩进文本解析为代码块。
+    转换机器人发送的消息，使其在被marked之前适应Markdown格式，同时防止误将缩进文本解析为代码块。
 
     注意: 为了避免输出被错误地解析成代码块，不能给输出加缩进。
 
@@ -301,7 +301,7 @@ def convert_bot_before_marked(chat_message):
         return chat_message
     else:
         # 创建原始消息的HTML表示，可能用于后续显示或处理
-        # 这里使用了clip_rawtext函数来处理原始文本，确保文本安全显示（函数细节未给出）
+        # 这里使用了clip_rawtext函数来处理原始文本，确保文本安全显示
         raw = f'<div class="raw-message hideM">{clip_rawtext(chat_message)}</div>'
         # really_raw = f'{START_OF_OUTPUT_MARK}<div class="really-raw hideM">{clip_rawtext(chat_message, need_escape=False)}\n</div>{END_OF_OUTPUT_MARK}'
 
@@ -374,33 +374,6 @@ def escape_markdown(text):
 
     # 遍历文本中的每个字符，如果字符是特殊字符则替换为其HTML实体，否则保持不变
     return "".join(escape_chars.get(c, c) for c in text)
-
-
-def convert_asis(userinput):  # deprecated
-    return (
-            f'<p style="white-space:pre-wrap;">{html.escape(userinput)}</p>'
-            + ALREADY_CONVERTED_MARK
-    )
-
-
-def detect_converted_mark(userinput):  # deprecated
-    try:
-        if userinput.endswith(ALREADY_CONVERTED_MARK):
-            return True
-        else:
-            return False
-    except:
-        return True
-
-
-def detect_language(code):  # deprecated
-    if code.startswith("\n"):
-        first_line = ""
-    else:
-        first_line = code.strip().split("\n", 1)[0]
-    language = first_line.lower() if first_line else ""
-    code_without_language = code[len(first_line):].lstrip() if first_line else code
-    return language, code_without_language
 
 
 def construct_text(role, text):
