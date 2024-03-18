@@ -537,6 +537,7 @@ def load_template(filename, mode=0):
             lines = json.load(f)
         lines = [[i["act"], i["prompt"]] for i in lines]
     else:
+        print(os.path.join(TEMPLATES_DIR, filename))
         with open(
                 os.path.join(TEMPLATES_DIR, filename), "r", encoding="utf8"
         ) as csvfile:
