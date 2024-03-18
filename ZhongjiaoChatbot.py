@@ -216,6 +216,54 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                     gr.HTML(get_html("close_btn.html").format(
                         obj="toolbox"), elem_classes="close-btn")
                 with gr.Tabs(elem_id="chuanhu-toolbox-tabs"):
+                    with gr.Tab(label=i18n("交通")):
+
+                        with gr.Accordion(label="交通设计", open=True):
+                            with gr.Accordion(label=i18n("设计业务"), open=True):
+                                with gr.Column():
+                                    with gr.Row():
+                                        with gr.Column(scale=6):
+                                            DesignWorkSelectDropdown = gr.Dropdown(
+                                                label=i18n("选择设计业务"),
+                                                choices=["选线", "绘图"],
+                                                multiselect=False,
+                                                container=False,
+                                            )
+
+                            with gr.Accordion(label=i18n("设计软件"), open=True):
+                                with gr.Column():
+                                    with gr.Row():
+                                        with gr.Column(scale=6):
+                                            DesignAppSelectDropdown = gr.Dropdown(
+                                                label=i18n("选择需要对接的设计软件"),
+                                                choices=["AutoCAD", "RoadRunner", "Unity"],
+                                                multiselect=True,
+                                                container=False,
+                                            )
+
+                        with gr.Accordion(label="交通仿真控制", open=True):
+                            with gr.Accordion(label=i18n("管控任务"), open=True):
+                                with gr.Column():
+                                    with gr.Row():
+                                        with gr.Column(scale=6):
+                                            ManageWorkSelectDropdown = gr.Dropdown(
+                                                label=i18n("选择管控任务"),
+                                                choices=["交通流仿真", "数字孪生", "故障模拟", "车辆管控", "自动驾驶"],
+                                                multiselect=False,
+                                                container=False,
+                                            )
+
+                            with gr.Accordion(label=i18n("仿真软件"), open=True):
+                                with gr.Column():
+                                    with gr.Row():
+                                        with gr.Column(scale=6):
+                                            ManageAppSelectDropdown = gr.Dropdown(
+                                                label=i18n("选择需要对接的仿真软件"),
+                                                choices=["SUMO", "Carla", "LimSim"],
+                                                multiselect=True,
+                                                container=False,
+                                            )
+
                     with gr.Tab(label=i18n("对话")):
                         with gr.Accordion(label=i18n("模型"), open=not HIDE_MY_KEY, visible=not HIDE_MY_KEY):
                             keyTxt = gr.Textbox(
@@ -286,7 +334,6 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                             summarize_btn = gr.Button(i18n("总结"))
                             # TODO: 公式ocr
                             # formula_ocr = gr.Checkbox(label=i18n("识别公式"), value=advance_docs["pdf"].get("formula_ocr", False))
-
                     with gr.Tab(label=i18n("参数")):
                         gr.Markdown(i18n("# ⚠️ 务必谨慎更改 ⚠️"),
                                     elem_id="advanced-warning")
@@ -368,9 +415,6 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                                 value=user_name.value,
                                 lines=1,
                             )
-                    with gr.Tab(label=i18n("拓展")):
-                        gr.Markdown(
-                            "Will be here soon...\n(We hope)\n\nAnd we hope you can help us to make more extensions!")
 
                     # changeAPIURLBtn = gr.Button(i18n("🔄 切换API地址"))
 

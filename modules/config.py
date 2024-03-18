@@ -9,7 +9,6 @@ import colorama
 from . import shared
 from . import presets
 
-
 __all__ = [
     "my_api_key",
     "sensitive_id",
@@ -49,6 +48,7 @@ def load_config_to_environ(key_list):
     for key in key_list:
         if key in config:
             os.environ[key.upper()] = os.environ.get(key.upper(), config[key])
+
 
 hide_history_when_not_logged_in = config.get(
     "hide_history_when_not_logged_in", False)
@@ -105,7 +105,7 @@ if "available_models" in config:
     logging.info(f"已设置可用模型：{config['available_models']}")
 
 # 模型配置
-if "extra_models" in  config:
+if "extra_models" in config:
     presets.MODELS.extend(config["extra_models"])
     logging.info(f"已添加额外的模型：{config['extra_models']}")
 
@@ -159,8 +159,8 @@ ollama_host = config.get("ollama_host", "")
 os.environ["OLLAMA_HOST"] = ollama_host
 
 load_config_to_environ(["openai_api_type", "azure_openai_api_key", "azure_openai_api_base_url",
-                       "azure_openai_api_version", "azure_deployment_name", "azure_embedding_deployment_name", "azure_embedding_model_name"])
-
+                        "azure_openai_api_version", "azure_deployment_name", "azure_embedding_deployment_name",
+                        "azure_embedding_model_name"])
 
 usage_limit = os.environ.get("USAGE_LIMIT", config.get("usage_limit", 120))
 
@@ -201,7 +201,6 @@ def retrieve_openai_api(api_key=None):
         os.environ["OPENAI_API_KEY"] = api_key
         yield api_key
     os.environ["OPENAI_API_KEY"] = old_api_key
-
 
 
 # 处理代理：
@@ -307,7 +306,8 @@ try:
     if default_model in presets.MODELS:
         presets.DEFAULT_MODEL = presets.MODELS.index(default_model)
     else:
-        presets.DEFAULT_MODEL = presets.MODELS.index(next((k for k, v in presets.MODEL_METADATA.items() if v.get("model_name") == default_model), None))
+        presets.DEFAULT_MODEL = presets.MODELS.index(
+            next((k for k, v in presets.MODEL_METADATA.items() if v.get("model_name") == default_model), None))
     logging.info("默认模型设置为了：" + str(presets.MODELS[presets.DEFAULT_MODEL]))
 except ValueError:
     logging.error("你填写的默认模型" + default_model + "不存在！请从下面的列表中挑一个填写：" + str(presets.MODELS))
