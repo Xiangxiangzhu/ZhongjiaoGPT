@@ -278,6 +278,19 @@ input:checked + .apSlider::before {
     opacity: 40%;
 }
 
+
+
+.hr-line2 .hr-line2 {
+    padding: 2px 6px 4px 6px !important;
+    /* opacity: 40%; */
+}
+.hr-line2 hr{
+    margin: 0 !important;
+}
+.dark .hr-line2 hr {
+    opacity: 15%;
+}
+
 .tooltip-toggle {
     cursor: help;
     position: relative;

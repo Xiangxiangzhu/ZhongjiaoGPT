@@ -66,12 +66,12 @@ ONLINE_MODELS = [
     # "川虎助理",
     # "川虎助理 Pro",
     # "DALL-E 3",
-    "Gemini Pro",
+    # "Gemini Pro",
     # "Gemini Pro Vision",
-    "GooglePaLM",
-    "Gemma 2B",
-    "Gemma 7B",
-    "xmchat",
+    # "GooglePaLM",
+    # "Gemma 2B",
+    # "Gemma 7B",
+    # "xmchat",
     # "Azure OpenAI",
     # "yuanai-1.0-base_10B",
     # "yuanai-1.0-translate",
@@ -82,136 +82,177 @@ ONLINE_MODELS = [
     # "讯飞星火大模型V3.0",
     # "讯飞星火大模型V2.0",
     # "讯飞星火大模型V1.5",
-    "Claude 3 Sonnet",
-    "Claude 3 Opus",
-    "ERNIE-Bot-turbo",
+    # "Claude 3 Sonnet",
+    # "Claude 3 Opus",
+    # "ERNIE-Bot-turbo",
     # "ERNIE-Bot",
-    "ERNIE-Bot-4",
+    # "ERNIE-Bot-4",
     # "Ollama"
 ]
 
 LOCAL_MODELS = [
-    "chatglm-6b",
-    "chatglm-6b-int4",
-    "chatglm-6b-int4-ge",
-    "chatglm2-6b",
-    "chatglm2-6b-int4",
+    "Qwen1.5-72B",
+    "Qwen1.5-14B",
+    "Qwen1.5-7B",
+    "Yi-34B",
+    "Yi-6B",
+    "Mistral-7B",
+    "Llama2-70B",
+    "Llama2-13B",
+    "Llama2-7B",
     "chatglm3-6b",
-    "chatglm3-6b-32k",
-    "StableLM",
-    "MOSS",
-    "Llama-2-7B-Chat",
-    "Qwen 7B",
-    "Qwen 14B"
+    # "Baichuan2-13B",
+    # "Baichuan2-7B"
+    # "chatglm-6b",
+    # "chatglm-6b-int4",
+    # "chatglm-6b-int4-ge",
+    # "chatglm2-6b",
+    # "chatglm2-6b-int4",
+    # "chatglm3-6b",
+    # "chatglm3-6b-32k",
+    # "StableLM",
+    # "MOSS",
 ]
 
 # Additional metadata for online and local models
 MODEL_METADATA = {
-    "Llama-2-7B": {
-        "repo_id": "TheBloke/Llama-2-7B-GGUF",
-        "filelist": ["llama-2-7b.Q6_K.gguf"],
+    # "Llama-2-7B": {
+    #     "repo_id": "TheBloke/Llama-2-7B-GGUF",
+    #     "filelist": ["llama-2-7b.Q6_K.gguf"],
+    # },
+    # "Llama-2-7B-Chat": {
+    #     "repo_id": "TheBloke/Llama-2-7b-Chat-GGUF",
+    #     "filelist": ["llama-2-7b-chat.Q6_K.gguf"],
+    # },
+    # "Qwen 7B": {
+    #     "repo_id": "Qwen/Qwen-7B-Chat-Int4",
+    # },
+    # "Qwen 14B": {
+    #     "repo_id": "Qwen/Qwen-14B-Chat-Int4",
+    # },
+
+    "Qwen1.5-72B": {
+        "repo_id": "",
     },
-    "Llama-2-7B-Chat": {
-        "repo_id": "TheBloke/Llama-2-7b-Chat-GGUF",
-        "filelist": ["llama-2-7b-chat.Q6_K.gguf"],
+    "Qwen1.5-14B": {
+        "repo_id": "",
     },
-    "Qwen 7B": {
-        "repo_id": "Qwen/Qwen-7B-Chat-Int4",
+    "Qwen1.5-7B": {
+        "repo_id": "",
     },
-    "Qwen 14B": {
-        "repo_id": "Qwen/Qwen-14B-Chat-Int4",
+    "Yi-34B": {
+        "repo_id": "",
     },
+    "Yi-6B": {
+        "repo_id": "",
+    },
+    "Mistral-7B": {
+        "repo_id": "",
+    },
+    "Llama2-70B": {
+        "repo_id": "",
+    },
+    "Llama2-13B": {
+        "repo_id": "",
+    },
+    "Llama2-7B": {
+        "repo_id": "",
+    },
+    "chatglm3-6b": {
+        "repo_id": "",
+    },
+
     "GPT3.5 Turbo": {
         "model_name": "gpt-3.5-turbo",
         "token_limit": 4096,
     },
-    "GPT3.5 Turbo Instruct": {
-        "model_name": "gpt-3.5-turbo-instruct",
-        "token_limit": 4096,
-    },
-    "GPT3.5 Turbo 16K": {
-        "model_name": "gpt-3.5-turbo-16k",
-        "token_limit": 16384,
-    },
-    "GPT3.5 Turbo 0301": {
-        "model_name": "gpt-3.5-turbo-0301",
-        "token_limit": 4096,
-    },
-    "GPT3.5 Turbo 0613": {
-        "model_name": "gpt-3.5-turbo-0613",
-        "token_limit": 4096,
-    },
-    "GPT3.5 Turbo 1106": {
-        "model_name": "gpt-3.5-turbo-1106",
-        "token_limit": 16384,
-    },
+    # "GPT3.5 Turbo Instruct": {
+    #     "model_name": "gpt-3.5-turbo-instruct",
+    #     "token_limit": 4096,
+    # },
+    # "GPT3.5 Turbo 16K": {
+    #     "model_name": "gpt-3.5-turbo-16k",
+    #     "token_limit": 16384,
+    # },
+    # "GPT3.5 Turbo 0301": {
+    #     "model_name": "gpt-3.5-turbo-0301",
+    #     "token_limit": 4096,
+    # },
+    # "GPT3.5 Turbo 0613": {
+    #     "model_name": "gpt-3.5-turbo-0613",
+    #     "token_limit": 4096,
+    # },
+    # "GPT3.5 Turbo 1106": {
+    #     "model_name": "gpt-3.5-turbo-1106",
+    #     "token_limit": 16384,
+    # },
     "GPT4": {
         "model_name": "gpt-4",
         "token_limit": 8192,
     },
-    "GPT4 32K": {
-        "model_name": "gpt-4-32k",
-        "token_limit": 32768,
-    },
-    "GPT4 Turbo": {
-        "model_name": "gpt-4-turbo-preview",
-        "token_limit": 128000,
-    },
-    "GPT4 Vision": {
-        "model_name": "gpt-4-vision-preview",
-        "token_limit": 128000,
-        "multimodal": True
-    },
-    "Claude": {
-        "model_name": "Claude",
-        "token_limit": 4096,
-    },
-    "Claude 3 Sonnet": {
-        "model_name": "claude-3-sonnet-20240229",
-        "token_limit": 200000,
-        "max_generation": 4096,
-        "multimodal": True
-    },
-    "Claude 3 Opus": {
-        "model_name": "claude-3-opus-20240229",
-        "token_limit": 200000,
-        "max_generation": 4096,
-        "multimodal": True
-    },
-    "ERNIE-Bot-turbo": {
-        "model_name": "ERNIE-Bot-turbo",
-        "token_limit": 1024,
-    },
-    "ERNIE-Bot": {
-        "model_name": "ERNIE-Bot",
-        "token_limit": 1024,
-    },
-    "ERNIE-Bot-4": {
-        "model_name": "ERNIE-Bot-4",
-        "token_limit": 1024,
-    },
-    "Gemini Pro": {
-        "model_name": "gemini-pro",
-        "token_limit": 30720,
-    },
-    "Gemini Pro Vision": {
-        "model_name": "gemini-pro-vision",
-        "token_limit": 30720,
-    },
-    "Ollama": {
-        "model_name": "ollama",
-        "token_limit": 4096,
-    },
-    "Gemma 2B": {
-        "repo_id": "google/gemma-2b-it",
-        "model_name": "gemma-2b-it",
-        "token_limit": 8192,
-    },
-    "Gemma 7B": {
-        "repo_id": "google/gemma-7b-it",
-        "model_name": "gemma-7b-it",
-        "token_limit": 8192,
-    }
+    # "GPT4 32K": {
+    #     "model_name": "gpt-4-32k",
+    #     "token_limit": 32768,
+    # },
+    # "GPT4 Turbo": {
+    #     "model_name": "gpt-4-turbo-preview",
+    #     "token_limit": 128000,
+    # },
+    # "GPT4 Vision": {
+    #     "model_name": "gpt-4-vision-preview",
+    #     "token_limit": 128000,
+    #     "multimodal": True
+    # },
+    # "Claude": {
+    #     "model_name": "Claude",
+    #     "token_limit": 4096,
+    # },
+    # "Claude 3 Sonnet": {
+    #     "model_name": "claude-3-sonnet-20240229",
+    #     "token_limit": 200000,
+    #     "max_generation": 4096,
+    #     "multimodal": True
+    # },
+    # "Claude 3 Opus": {
+    #     "model_name": "claude-3-opus-20240229",
+    #     "token_limit": 200000,
+    #     "max_generation": 4096,
+    #     "multimodal": True
+    # },
+    # "ERNIE-Bot-turbo": {
+    #     "model_name": "ERNIE-Bot-turbo",
+    #     "token_limit": 1024,
+    # },
+    # "ERNIE-Bot": {
+    #     "model_name": "ERNIE-Bot",
+    #     "token_limit": 1024,
+    # },
+    # "ERNIE-Bot-4": {
+    #     "model_name": "ERNIE-Bot-4",
+    #     "token_limit": 1024,
+    # },
+    # "Gemini Pro": {
+    #     "model_name": "gemini-pro",
+    #     "token_limit": 30720,
+    # },
+    # "Gemini Pro Vision": {
+    #     "model_name": "gemini-pro-vision",
+    #     "token_limit": 30720,
+    # },
+    # "Ollama": {
+    #     "model_name": "ollama",
+    #     "token_limit": 4096,
+    # },
+    # "Gemma 2B": {
+    #     "repo_id": "google/gemma-2b-it",
+    #     "model_name": "gemma-2b-it",
+    #     "token_limit": 8192,
+    # },
+    # "Gemma 7B": {
+    #     "repo_id": "google/gemma-7b-it",
+    #     "model_name": "gemma-7b-it",
+    #     "token_limit": 8192,
+    # }
 }
 
 if os.environ.get('HIDE_LOCAL_MODELS', 'false') == 'true':
@@ -408,7 +449,8 @@ small_and_beautiful_theme = gr.themes.Soft(
     button_primary_text_color="*secondary_200",
     button_primary_text_color_dark="white",
     button_secondary_background_fill="*neutral_100",
-    button_secondary_background_fill_hover="*neutral_50",
+    button_secondary_background_fill_hover="*secondary_100",
+    button_secondary_background_fill_hover_dark="*secondary_900",
     button_secondary_background_fill_dark="*neutral_900",
     button_secondary_text_color="*neutral_800",
     button_secondary_text_color_dark="white",

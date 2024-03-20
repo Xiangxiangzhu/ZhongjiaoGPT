@@ -17,13 +17,13 @@ from .base_model import BaseLLMModel
 
 class OpenAIClient(BaseLLMModel):
     def __init__(
-        self,
-        model_name,
-        api_key,
-        system_prompt=INITIAL_SYSTEM_PROMPT,
-        temperature=1.0,
-        top_p=1.0,
-        user_name=""
+            self,
+            model_name,
+            api_key,
+            system_prompt=INITIAL_SYSTEM_PROMPT,
+            temperature=1.0,
+            top_p=1.0,
+            user_name=""
     ) -> None:
         super().__init__(
             model_name=model_name,
@@ -90,14 +90,14 @@ class OpenAIClient(BaseLLMModel):
 
             # return i18n("**本月使用金额** ") + f"\u3000 ${rounded_usage}"
             return get_html("billing_info.html").format(
-                    label = i18n("本月使用金额"),
-                    usage_percent = usage_percent,
-                    rounded_usage = rounded_usage,
-                    usage_limit = usage_limit
-                )
+                label=i18n("本月使用金额"),
+                usage_percent=usage_percent,
+                rounded_usage=rounded_usage,
+                usage_limit=usage_limit
+            )
         except requests.exceptions.ConnectTimeout:
             status_text = (
-                STANDARD_ERROR_MSG + CONNECTION_TIMEOUT_MSG + ERROR_RETRIEVE_MSG
+                    STANDARD_ERROR_MSG + CONNECTION_TIMEOUT_MSG + ERROR_RETRIEVE_MSG
             )
             return status_text
         except requests.exceptions.ReadTimeout:
@@ -173,7 +173,6 @@ class OpenAIClient(BaseLLMModel):
             "Authorization": f"Bearer {sensitive_id}",
         }
 
-
     def _get_billing_data(self, billing_url):
         with retrieve_proxy():
             response = requests.get(
@@ -218,7 +217,7 @@ class OpenAIClient(BaseLLMModel):
                 except:
                     print(f"ERROR: {chunk}")
                     continue
-        if error_msg and not error_msg=="data: [DONE]":
+        if error_msg and not error_msg == "data: [DONE]":
             raise Exception(error_msg)
 
     def set_key(self, new_access_key):
@@ -252,7 +251,6 @@ class OpenAIClient(BaseLLMModel):
 
         return response
 
-
     def auto_name_chat_history(self, name_chat_method, user_question, chatbot, single_turn_checkbox):
         if len(self.history) == 2 and not single_turn_checkbox and not hide_history_when_not_logged_in:
             user_question = self.history[0]["content"]
@@ -260,8 +258,9 @@ class OpenAIClient(BaseLLMModel):
                 ai_answer = self.history[1]["content"]
                 try:
                     history = [
-                        { "role": "system", "content": SUMMARY_CHAT_SYSTEM_PROMPT},
-                        { "role": "user", "content": f"Please write a title based on the following conversation:\n---\nUser: {user_question}\nAssistant: {ai_answer}"}
+                        {"role": "system", "content": SUMMARY_CHAT_SYSTEM_PROMPT},
+                        {"role": "user",
+                         "content": f"Please write a title based on the following conversation:\n---\nUser: {user_question}\nAssistant: {ai_answer}"}
                     ]
                     response = self._single_query_at_once(history, temperature=0.0)
                     response = json.loads(response.text)

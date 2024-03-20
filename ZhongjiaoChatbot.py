@@ -79,6 +79,7 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
 
     with gr.Row(equal_height=True, elem_id="chuanhu-body"):
 
+        # 左侧栏，对话历史、搜索等模块
         with gr.Column(elem_id="menu-area"):
             with gr.Column(elem_id="chuanhu-history"):
                 with gr.Box():
@@ -134,6 +135,7 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                 # gr.HTML(get_html("footer.html").format(versions=versions_html()), elem_id="footer")
                 # gr.Markdown(CHUANHU_DESCRIPTION, elem_id="chuanhu-author")
 
+        # 中上部分，模型选择、新建对话、输入对话 etc
         with gr.Column(elem_id="chuanhu-area", scale=5):
             with gr.Column(elem_id="chatbot-area"):
                 with gr.Row(elem_id="chatbot-header"):
@@ -187,16 +189,16 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                                     cancelBtn = gr.Button(
                                         value="", variant="secondary", visible=False, elem_id="cancel-btn")
                         # Note: Buttons below are set invisible in UI. But they are used in JS.
-                        with gr.Row(elem_id="chatbot-buttons", visible=False):
+                        with gr.Row(elem_id="chatbot-buttons", visible=True):
                             with gr.Column(min_width=120, scale=1):
                                 emptyBtn = gr.Button(
-                                    i18n("🧹 新的对话"), elem_id="empty-btn"
+                                    i18n("☘️ 新的对话"), elem_id="empty-btn"
                                 )
                             with gr.Column(min_width=120, scale=1):
                                 retryBtn = gr.Button(
-                                    i18n("🔄 重新生成"), elem_id="gr-retry-btn")
+                                    i18n("♻️ 重新生成"), elem_id="gr-retry-btn")
                             with gr.Column(min_width=120, scale=1):
-                                delFirstBtn = gr.Button(i18n("🗑️ 删除最旧对话"))
+                                delFirstBtn = gr.Button(i18n("️🗑️ 删除最旧对话"))
                             with gr.Column(min_width=120, scale=1):
                                 delLastBtn = gr.Button(
                                     i18n("🗑️ 删除最新对话"), elem_id="gr-dellast-btn")
@@ -208,6 +210,7 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                                     dislikeBtn = gr.Button(
                                         "👎", elem_id="gr-dislike-btn")
 
+        #
         with gr.Column(elem_id="toolbox-area", scale=1):
             # For CSS setting, there is an extra box. Don't remove it.
             with gr.Box(elem_id="chuanhu-toolbox"):
@@ -217,18 +220,22 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                         obj="toolbox"), elem_classes="close-btn")
                 with gr.Tabs(elem_id="chuanhu-toolbox-tabs"):
                     with gr.Tab(label=i18n("交通")):
-
                         with gr.Accordion(label="交通设计", open=True):
                             with gr.Accordion(label=i18n("设计业务"), open=True):
                                 with gr.Column():
                                     with gr.Row():
+                                        design_work_list = ["无", "选线", "绘图"]
                                         with gr.Column(scale=6):
                                             DesignWorkSelectDropdown = gr.Dropdown(
                                                 label=i18n("选择设计业务"),
-                                                choices=["选线", "绘图"],
+                                                choices=design_work_list,
                                                 multiselect=False,
+                                                value=design_work_list[0],
+                                                interactive=True,
                                                 container=False,
                                             )
+
+                            gr.Markdown("---", elem_classes="hr-line2")
 
                             with gr.Accordion(label=i18n("设计软件"), open=True):
                                 with gr.Column():
@@ -236,22 +243,29 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                                         with gr.Column(scale=6):
                                             DesignAppSelectDropdown = gr.Dropdown(
                                                 label=i18n("选择需要对接的设计软件"),
-                                                choices=["AutoCAD", "RoadRunner", "Unity"],
+                                                choices=["CAD", "RR", "Unity"],
                                                 multiselect=True,
                                                 container=False,
                                             )
+                        gr.Markdown("---", elem_classes="hr-line")
 
                         with gr.Accordion(label="交通仿真控制", open=True):
                             with gr.Accordion(label=i18n("管控任务"), open=True):
                                 with gr.Column():
                                     with gr.Row():
+                                        traffic_task = ["无", "交通流仿真", "数字孪生", "故障模拟", "车辆管控",
+                                                        "自动驾驶"]
                                         with gr.Column(scale=6):
                                             ManageWorkSelectDropdown = gr.Dropdown(
                                                 label=i18n("选择管控任务"),
-                                                choices=["交通流仿真", "数字孪生", "故障模拟", "车辆管控", "自动驾驶"],
+                                                choices=traffic_task,
                                                 multiselect=False,
+                                                value=traffic_task[0],
+                                                interactive=True,
                                                 container=False,
                                             )
+
+                            gr.Markdown("---", elem_classes="hr-line2")
 
                             with gr.Accordion(label=i18n("仿真软件"), open=True):
                                 with gr.Column():

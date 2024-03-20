@@ -80,17 +80,17 @@ class ChuanhuCallbackHandler(BaseCallbackHandler):
         self.callback = callback
 
     def on_agent_action(
-        self, action: AgentAction, color: Optional[str] = None, **kwargs: Any
+            self, action: AgentAction, color: Optional[str] = None, **kwargs: Any
     ) -> Any:
         self.callback(get_action_description(action.log))
 
     def on_tool_end(
-        self,
-        output: str,
-        color: Optional[str] = None,
-        observation_prefix: Optional[str] = None,
-        llm_prefix: Optional[str] = None,
-        **kwargs: Any,
+            self,
+            output: str,
+            color: Optional[str] = None,
+            observation_prefix: Optional[str] = None,
+            llm_prefix: Optional[str] = None,
+            **kwargs: Any,
     ) -> None:
         """If not the final action, print out observation."""
         # if observation_prefix is not None:
@@ -105,7 +105,7 @@ class ChuanhuCallbackHandler(BaseCallbackHandler):
             logging.info(llm_prefix)
 
     def on_agent_finish(
-        self, finish: AgentFinish, color: Optional[str] = None, **kwargs: Any
+            self, finish: AgentFinish, color: Optional[str] = None, **kwargs: Any
     ) -> None:
         # self.callback(f"{finish.log}\n\n")
         logging.info(finish.log)
@@ -115,10 +115,10 @@ class ChuanhuCallbackHandler(BaseCallbackHandler):
         self.callback(token)
 
     def on_chat_model_start(
-        self,
-        serialized: Dict[str, Any],
-        messages: List[List[BaseMessage]],
-        **kwargs: Any,
+            self,
+            serialized: Dict[str, Any],
+            messages: List[List[BaseMessage]],
+            **kwargs: Any,
     ) -> Any:
         """Run when a chat model starts running."""
         pass
@@ -129,75 +129,21 @@ class ModelType(Enum):
     OpenAI = 0
     ChatGLM = 1
     LLaMA = 2
-    XMChat = 3
-    StableLM = 4
-    MOSS = 5
-    YuanAI = 6
-    Minimax = 7
-    ChuanhuAgent = 8
-    GooglePaLM = 9
-    LangchainChat = 10
-    Midjourney = 11
-    Spark = 12
-    OpenAIInstruct = 13
-    Claude = 14
-    Qwen = 15
-    OpenAIVision = 16
-    ERNIE = 17
-    DALLE3 = 18
-    GoogleGemini = 19
-    GoogleGemma = 20
-    Ollama = 21
+    Qwen = 3
+    Yi = 4
 
     @classmethod
     def get_type(cls, model_name: str):
         model_type = None
         model_name_lower = model_name.lower()
         if "gpt" in model_name_lower:
-            if "instruct" in model_name_lower:
-                model_type = ModelType.OpenAIInstruct
-            elif "vision" in model_name_lower:
-                model_type = ModelType.OpenAIVision
-            else:
-                model_type = ModelType.OpenAI
+            model_type = ModelType.OpenAI
         elif "chatglm" in model_name_lower:
             model_type = ModelType.ChatGLM
-        elif "ollama" in model_name_lower:
-            model_type = ModelType.Ollama
-        elif "llama" in model_name_lower or "alpaca" in model_name_lower:
-            model_type = ModelType.LLaMA
-        elif "xmchat" in model_name_lower:
-            model_type = ModelType.XMChat
-        elif "stablelm" in model_name_lower:
-            model_type = ModelType.StableLM
-        elif "moss" in model_name_lower:
-            model_type = ModelType.MOSS
-        elif "yuanai" in model_name_lower:
-            model_type = ModelType.YuanAI
-        elif "minimax" in model_name_lower:
-            model_type = ModelType.Minimax
-        elif "川虎助理" in model_name_lower:
-            model_type = ModelType.ChuanhuAgent
-        elif "palm" in model_name_lower:
-            model_type = ModelType.GooglePaLM
-        elif "gemini" in model_name_lower:
-            model_type = ModelType.GoogleGemini
-        elif "midjourney" in model_name_lower:
-            model_type = ModelType.Midjourney
-        elif "azure" in model_name_lower or "api" in model_name_lower:
-            model_type = ModelType.LangchainChat
-        elif "星火大模型" in model_name_lower:
-            model_type = ModelType.Spark
-        elif "claude" in model_name_lower:
-            model_type = ModelType.Claude
         elif "qwen" in model_name_lower:
             model_type = ModelType.Qwen
-        elif "ernie" in model_name_lower:
-            model_type = ModelType.ERNIE
-        elif "dall" in model_name_lower:
-            model_type = ModelType.DALLE3
-        elif "gemma" in model_name_lower:
-            model_type = ModelType.GoogleGemma
+        elif "yi" in model_name_lower:
+            model_type = ModelType.Yi
         else:
             model_type = ModelType.LLaMA
         return model_type
@@ -233,19 +179,19 @@ def download(repo_id, filename, retry=10):
 
 class BaseLLMModel:
     def __init__(
-        self,
-        model_name,
-        system_prompt=INITIAL_SYSTEM_PROMPT,
-        temperature=1.0,
-        top_p=1.0,
-        n_choices=1,
-        stop=[],
-        max_generation_token=None,
-        presence_penalty=0,
-        frequency_penalty=0,
-        logit_bias=None,
-        user="",
-        single_turn=False,
+            self,
+            model_name,
+            system_prompt=INITIAL_SYSTEM_PROMPT,
+            temperature=1.0,
+            top_p=1.0,
+            n_choices=1,
+            stop=[],
+            max_generation_token=None,
+            presence_penalty=0,
+            frequency_penalty=0,
+            logit_bias=None,
+            user="",
+            single_turn=False,
     ) -> None:
         self.history = []
         self.all_token_counts = []
@@ -352,7 +298,7 @@ class BaseLLMModel:
 
         if display_append:
             display_append = (
-                '\n\n<hr class="append-display no-in-raw" />' + display_append
+                    '\n\n<hr class="append-display no-in-raw" />' + display_append
             )
         partial_text = ""
         token_increment = 1
@@ -434,9 +380,9 @@ class BaseLLMModel:
             from langchain.prompts import PromptTemplate
 
             prompt_template = (
-                "Write a concise summary of the following:\n\n{text}\n\nCONCISE SUMMARY IN "
-                + language
-                + ":"
+                    "Write a concise summary of the following:\n\n{text}\n\nCONCISE SUMMARY IN "
+                    + language
+                    + ":"
             )
             PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
             llm = ChatOpenAI()
@@ -456,13 +402,13 @@ class BaseLLMModel:
         return chatbot, status
 
     def prepare_inputs(
-        self,
-        real_inputs,
-        use_websearch,
-        files,
-        reply_language,
-        chatbot,
-        load_from_cache_if_possible=True,
+            self,
+            real_inputs,
+            use_websearch,
+            files,
+            reply_language,
+            chatbot,
+            load_from_cache_if_possible=True,
     ):
         display_append = []
         limited_context = False
@@ -545,12 +491,12 @@ class BaseLLMModel:
                 reference_results.append([result["body"], result["href"]])
                 display_append.append(
                     # f"{idx+1}. [{domain_name}]({result['href']})\n"
-                    f"<a href=\"{result['href']}\" target=\"_blank\">{idx+1}.&nbsp;{result['title']}</a>"
+                    f"<a href=\"{result['href']}\" target=\"_blank\">{idx + 1}.&nbsp;{result['title']}</a>"
                 )
             reference_results = add_source_numbers(reference_results)
             # display_append = "<ol>\n\n" + "".join(display_append) + "</ol>"
             display_append = (
-                '<div class = "source-a">' + "".join(display_append) + "</div>"
+                    '<div class = "source-a">' + "".join(display_append) + "</div>"
             )
             if type(real_inputs) == list:
                 real_inputs[0]["text"] = (
@@ -571,14 +517,14 @@ class BaseLLMModel:
         return limited_context, fake_inputs, display_append, real_inputs, chatbot
 
     def predict(
-        self,
-        inputs,
-        chatbot,
-        stream=False,
-        use_websearch=False,
-        files=None,
-        reply_language="中文",
-        should_check_token_count=True,
+            self,
+            inputs,
+            chatbot,
+            stream=False,
+            use_websearch=False,
+            files=None,
+            reply_language="中文",
+            should_check_token_count=True,
     ):  # repetition_penalty, top_k
         status_text = "开始生成回答……"
         if type(inputs) == list:
@@ -626,9 +572,9 @@ class BaseLLMModel:
         yield chatbot + [(fake_inputs, "")], status_text
 
         if (
-            self.need_api_key
-            and self.api_key is None
-            and not shared.state.multi_api_key
+                self.need_api_key
+                and self.api_key is None
+                and not shared.state.multi_api_key
         ):
             status_text = STANDARD_ERROR_MSG + NO_APIKEY_MSG
             logging.info(status_text)
@@ -688,7 +634,8 @@ class BaseLLMModel:
                 + f"{self.history[-1]['content']}"
                 + colorama.Style.RESET_ALL
             )
-            logging.info(i18n("Tokens per second：{token_generation_speed}").format(token_generation_speed=str(self.all_token_counts[-1] / (end_time - start_time))))
+            logging.info(i18n("Tokens per second：{token_generation_speed}").format(
+                token_generation_speed=str(self.all_token_counts[-1] / (end_time - start_time))))
 
         if limited_context:
             # self.history = self.history[-4:]
@@ -701,9 +648,9 @@ class BaseLLMModel:
         if sum(self.all_token_counts) > max_token and should_check_token_count:
             count = 0
             while (
-                sum(self.all_token_counts)
-                > self.token_upper_limit * REDUCE_TOKEN_FACTOR
-                and sum(self.all_token_counts) > 0
+                    sum(self.all_token_counts)
+                    > self.token_upper_limit * REDUCE_TOKEN_FACTOR
+                    and sum(self.all_token_counts) > 0
             ):
                 count += 1
                 del self.all_token_counts[0]
@@ -716,12 +663,12 @@ class BaseLLMModel:
         self.auto_save(chatbot)
 
     def retry(
-        self,
-        chatbot,
-        stream=False,
-        use_websearch=False,
-        files=None,
-        reply_language="中文",
+            self,
+            chatbot,
+            stream=False,
+            use_websearch=False,
+            files=None,
+            reply_language="中文",
     ):
         logging.debug("重试中……")
         if len(self.history) > 1:
@@ -918,10 +865,10 @@ class BaseLLMModel:
         for i in range(len(token_lst)):
             token_sum += sum(token_lst[: i + 1])
         return (
-            i18n("Token 计数: ")
-            + f"{sum(token_lst)}"
-            + i18n("，本次对话累计消耗了 ")
-            + f"{token_sum} tokens"
+                i18n("Token 计数: ")
+                + f"{sum(token_lst)}"
+                + i18n("，本次对话累计消耗了 ")
+                + f"{token_sum} tokens"
         )
 
     def rename_chat_history(self, filename, chatbot):
@@ -945,7 +892,7 @@ class BaseLLMModel:
         return init_history_list(self.user_name)
 
     def auto_name_chat_history(
-        self, name_chat_method, user_question, chatbot, single_turn_checkbox
+            self, name_chat_method, user_question, chatbot, single_turn_checkbox
     ):
         if len(self.history) == 2 and not single_turn_checkbox:
             user_question = self.history[0]["content"]
@@ -1011,8 +958,8 @@ class BaseLLMModel:
             if len(saved_json["chatbot"]) < len(saved_json["history"]) // 2:
                 logging.info("Trimming corrupted history...")
                 saved_json["history"] = saved_json["history"][
-                    -len(saved_json["chatbot"]) :
-                ]
+                                        -len(saved_json["chatbot"]):
+                                        ]
                 logging.info(f"Trimmed history: {saved_json['history']}")
             logging.debug(f"{self.user_name} 加载对话历史完毕")
             self.history = saved_json["history"]
@@ -1141,12 +1088,12 @@ class BaseLLMModel:
 
 
 class Base_Chat_Langchain_Client(BaseLLMModel):
-    def __init__(self, model_name, user_name=""):
+    def __init__(self, model_name, user_name="", model_url=None):
         super().__init__(model_name, user=user_name)
         self.need_api_key = False
-        self.model = self.setup_model()
+        self.model = self.setup_model(model_url)
 
-    def setup_model(self):
+    def setup_model(self, model_url=None):
         # inplement this to setup the model then return it
         pass
 
