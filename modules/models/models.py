@@ -58,8 +58,13 @@ def get_model(
             elif "7b" in lower_model_name:
                 openai_api_base = "http://172.16.2.83:8010/v1"
             print("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
-            from .MyClient import QwenClient
-            model = QwenClient(model_name, user_name=user_name)
+            from .MyClient import MyBaseClient, MyCurlClient
+            # model = MyBaseClient(model_name, user_name=user_name)
+            model = MyCurlClient(
+                model_name=model_name,
+                system_prompt=system_prompt,
+                user_name=user_name,
+            )
         elif model_type == ModelType.Yi:
             if "6B" in lower_model_name:
                 openai_api_base = "http://172.16.2.83:8004/v1"
