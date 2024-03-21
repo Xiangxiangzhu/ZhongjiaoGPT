@@ -153,7 +153,9 @@ class OpenAIClient(BaseLLMModel):
         if shared.state.chat_completion_url != CHAT_COMPLETION_URL:
             logging.debug(f"使用自定义API URL: {shared.state.chat_completion_url}")
 
-        with retrieve_proxy():
+        os.environ["HTTP_PROXY"] = 'http://127.0.0.1:7890'
+        os.environ["HTTPS_PROXY"] = 'http://127.0.0.1:7890'
+        with retrieve_proxy('http://127.0.0.1:7890'):
             try:
                 response = requests.post(
                     shared.state.chat_completion_url,
@@ -174,7 +176,9 @@ class OpenAIClient(BaseLLMModel):
         }
 
     def _get_billing_data(self, billing_url):
-        with retrieve_proxy():
+        os.environ["HTTP_PROXY"] = 'http://127.0.0.1:7890'
+        os.environ["HTTPS_PROXY"] = 'http://127.0.0.1:7890'
+        with retrieve_proxy('http://127.0.0.1:7890'):
             response = requests.get(
                 billing_url,
                 headers=self.headers,
@@ -240,7 +244,9 @@ class OpenAIClient(BaseLLMModel):
         if shared.state.chat_completion_url != CHAT_COMPLETION_URL:
             logging.debug(f"使用自定义API URL: {shared.state.chat_completion_url}")
 
-        with retrieve_proxy():
+        os.environ["HTTP_PROXY"] = 'http://127.0.0.1:7890'
+        os.environ["HTTPS_PROXY"] = 'http://127.0.0.1:7890'
+        with retrieve_proxy('http://127.0.0.1:7890'):
             response = requests.post(
                 shared.state.chat_completion_url,
                 headers=headers,

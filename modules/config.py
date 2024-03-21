@@ -237,6 +237,30 @@ def retrieve_proxy(proxy=None):
         os.environ["HTTP_PROXY"], os.environ["HTTPS_PROXY"] = old_var
 
 
+# @contextmanager
+# def my_retrieve_proxy(proxy=None):
+#     """
+#     1, 如果proxy != NONE，设置环境变量，并返回最新设置的代理
+#     2，如果proxy = NONE，不更新环境变量
+#     """
+#     if proxy is not None:
+#         old_var = os.environ["HTTP_PROXY"], os.environ["HTTPS_PROXY"]
+#         os.environ["HTTP_PROXY"] = proxy
+#         os.environ["HTTPS_PROXY"] = proxy
+#         yield proxy, proxy  # return new proxy
+#
+#         # return old proxy
+#         os.environ["HTTP_PROXY"], os.environ["HTTPS_PROXY"] = old_var
+#
+#         http_proxy = proxy
+#         https_proxy = proxy
+#         yield http_proxy, https_proxy
+#     else:
+#         http_proxy, https_proxy = os.environ["HTTP_PROXY"], os.environ["HTTPS_PROXY"]
+#
+#         yield http_proxy, https_proxy  # return new proxy
+
+
 # 处理latex options
 user_latex_option = config.get("latex_option", "default")
 if user_latex_option == "default":
