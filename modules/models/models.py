@@ -62,6 +62,7 @@ def get_model(
             # model = MyBaseClient(model_name, user_name=user_name)
             model = MyCurlClient(
                 model_name=model_name,
+                openai_api_base=openai_api_base,
                 system_prompt=system_prompt,
                 user_name=user_name,
             )

@@ -8,7 +8,7 @@ import colorama
 import requests
 
 from .. import shared
-from ..config import retrieve_proxy, sensitive_id, usage_limit
+from ..config import retrieve_proxy, sensitive_id, usage_limit, http_proxy, https_proxy
 from ..index_func import *
 from ..presets import *
 from ..utils import *
@@ -153,8 +153,8 @@ class OpenAIClient(BaseLLMModel):
         if shared.state.chat_completion_url != CHAT_COMPLETION_URL:
             logging.debug(f"使用自定义API URL: {shared.state.chat_completion_url}")
 
-        os.environ["HTTP_PROXY"] = 'http://127.0.0.1:7890'
-        os.environ["HTTPS_PROXY"] = 'http://127.0.0.1:7890'
+        os.environ["HTTP_PROXY"] = http_proxy
+        os.environ["HTTPS_PROXY"] = https_proxy
         with retrieve_proxy('http://127.0.0.1:7890'):
             try:
                 response = requests.post(
@@ -176,8 +176,8 @@ class OpenAIClient(BaseLLMModel):
         }
 
     def _get_billing_data(self, billing_url):
-        os.environ["HTTP_PROXY"] = 'http://127.0.0.1:7890'
-        os.environ["HTTPS_PROXY"] = 'http://127.0.0.1:7890'
+        os.environ["HTTP_PROXY"] = http_proxy
+        os.environ["HTTPS_PROXY"] = https_proxy
         with retrieve_proxy('http://127.0.0.1:7890'):
             response = requests.get(
                 billing_url,
@@ -244,8 +244,8 @@ class OpenAIClient(BaseLLMModel):
         if shared.state.chat_completion_url != CHAT_COMPLETION_URL:
             logging.debug(f"使用自定义API URL: {shared.state.chat_completion_url}")
 
-        os.environ["HTTP_PROXY"] = 'http://127.0.0.1:7890'
-        os.environ["HTTPS_PROXY"] = 'http://127.0.0.1:7890'
+        os.environ["HTTP_PROXY"] = http_proxy
+        os.environ["HTTPS_PROXY"] = https_proxy
         with retrieve_proxy('http://127.0.0.1:7890'):
             response = requests.post(
                 shared.state.chat_completion_url,

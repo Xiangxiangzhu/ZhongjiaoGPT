@@ -105,6 +105,7 @@ class MyCurlClient(BaseLLMModel):
     def __init__(
             self,
             model_name,
+            openai_api_base,
             system_prompt=INITIAL_SYSTEM_PROMPT,
             temperature=1.0,
             top_p=1.0,
@@ -118,7 +119,7 @@ class MyCurlClient(BaseLLMModel):
             user=user_name
         )
         self.api_key = "EMPTY"
-        self.api_base = "http://172.16.2.83:8012/v1/chat/completions"
+        self.api_base = f"{openai_api_base}/chat/completions"
 
         self.need_api_key = False
         self._refresh_header()
