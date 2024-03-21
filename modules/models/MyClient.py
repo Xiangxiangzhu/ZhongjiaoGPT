@@ -14,6 +14,10 @@ class QwenClient(BaseLLMModel):
         openai_api_key = "EMPTY"
         openai_api_base = "http://172.16.2.83:8012/v1"
 
+        os.environ.pop('http_proxy', None)
+        os.environ.pop('https_proxy', None)
+        os.environ.pop('all_proxy', None)
+
         self.client = OpenAI(
             api_key=openai_api_key,
             base_url=openai_api_base,
@@ -37,6 +41,9 @@ class QwenClient(BaseLLMModel):
 
         )
         content = response.choices[0].message.content
+        print("##### test ######")
+        print(content)
+        print("##### test ######")
 
     def generation_config(self):
         pass
