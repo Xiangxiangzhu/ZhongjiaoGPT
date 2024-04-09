@@ -87,7 +87,8 @@ ONLINE_MODELS = [
     # "ERNIE-Bot-turbo",
     # "ERNIE-Bot",
     # "ERNIE-Bot-4",
-    # "Ollama"
+    # "Ollama",
+    "Zhongjiao Agent"
 ]
 
 LOCAL_MODELS = [
@@ -130,6 +131,12 @@ MODEL_METADATA = {
     # "Qwen 14B": {
     #     "repo_id": "Qwen/Qwen-14B-Chat-Int4",
     # },
+
+    "Zhongjiao Agent": {
+        "repo_id": "",
+        "model_name": "gemma-7b-it",
+        "token_limit": 8192,
+    },
 
     "Qwen1.5-72B": {
         "repo_id": "",

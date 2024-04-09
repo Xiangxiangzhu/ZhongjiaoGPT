@@ -131,6 +131,7 @@ class ModelType(Enum):
     LLaMA = 2
     Qwen = 3
     Yi = 4
+    Agent = 5
 
     @classmethod
     def get_type(cls, model_name: str):
@@ -144,6 +145,8 @@ class ModelType(Enum):
             model_type = ModelType.Qwen
         elif "yi" in model_name_lower:
             model_type = ModelType.Yi
+        elif "agent" in model_name_lower:
+            model_type = ModelType.Agent
         else:
             model_type = ModelType.LLaMA
         return model_type

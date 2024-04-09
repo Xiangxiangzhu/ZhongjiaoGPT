@@ -78,6 +78,10 @@ def get_model(
             elif "13b" in lower_model_name:
                 openai_api_base = "http://172.16.2.83:8002/v1"
             pass
+        elif model_type == ModelType.Agent:
+            from .ZhongjiaoAgent import AgentClient
+            model = AgentClient(model_name, access_key, user_name=user_name)
+            msg = i18n("启用的工具：") + ", ".join([i.name for i in model.tools])
 
         elif model_type == ModelType.Unknown:
             raise ValueError(f"Unknown model: {model_name}")
