@@ -243,7 +243,7 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                                         with gr.Column(scale=6):
                                             DesignAppSelectDropdown = gr.Dropdown(
                                                 label=i18n("选择需要对接的设计软件"),
-                                                choices=["CAD", "RR", "Unity"],
+                                                choices=["CAD", "BIM", "Unity"],
                                                 multiselect=True,
                                                 container=False,
                                             )
