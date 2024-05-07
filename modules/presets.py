@@ -88,7 +88,8 @@ ONLINE_MODELS = [
     # "ERNIE-Bot",
     # "ERNIE-Bot-4",
     # "Ollama",
-    "Zhongjiao Agent"
+    "Zhongjiao Agent",
+    "Simulation Agent"
 ]
 
 LOCAL_MODELS = [
@@ -133,6 +134,12 @@ MODEL_METADATA = {
     # },
 
     "Zhongjiao Agent": {
+        "repo_id": "",
+        "model_name": "gemma-7b-it",
+        "token_limit": 8192,
+    },
+
+    "Simulation Agent": {
         "repo_id": "",
         "model_name": "gemma-7b-it",
         "token_limit": 8192,
