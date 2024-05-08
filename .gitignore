@@ -153,6 +153,5 @@ include/
 pyvenv.cfg
 
 create_release.sh
-modules/models/
 
 
