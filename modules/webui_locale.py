@@ -16,6 +16,8 @@ class I18nAuto:
         language = language.replace("-", "_")
         if language == "auto":
             language = locale.getdefaultlocale()[0]  # get the language code of the system (ex. zh_CN)
+        # todo: en_US is has display issue, part of UI text is in Chinese, set zh_CN here!
+        language = "zh_CN"
         self.language_map = {}
         self.file_is_exists = os.path.isfile(f"./locale/{language}.json")
         if self.file_is_exists:
