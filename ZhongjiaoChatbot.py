@@ -229,8 +229,8 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                                             DesignWorkSelectDropdown = gr.Dropdown(
                                                 label=i18n("选择设计业务"),
                                                 choices=design_work_list,
-                                                multiselect=False,
-                                                value=design_work_list[0],
+                                                multiselect=True,
+                                                # value=design_work_list[0],
                                                 interactive=True,
                                                 container=False,
                                             )
@@ -243,7 +243,7 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                                         with gr.Column(scale=6):
                                             DesignAppSelectDropdown = gr.Dropdown(
                                                 label=i18n("选择需要对接的设计软件"),
-                                                choices=["CAD", "BIM", "Unity"],
+                                                choices=["CAD", "BIM", "纬地"],
                                                 multiselect=True,
                                                 container=False,
                                             )
@@ -278,7 +278,7 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                                                 container=False,
                                             )
 
-                    with gr.Tab(label=i18n("对话")):
+                    with gr.Tab(label=i18n("文档")):
                         with gr.Accordion(label=i18n("模型"), open=not HIDE_MY_KEY, visible=not HIDE_MY_KEY):
                             keyTxt = gr.Textbox(
                                 show_label=True,
