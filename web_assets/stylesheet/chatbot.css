@@ -38,7 +38,7 @@ hr.append-display {
     flex: 2;
 }
 
-/* 川虎助理 */
+/* 中交助理 */
 .agent-prefix {
     font-size: smaller; 
     opacity: 0.6;
@@ -51,7 +51,7 @@ hr.append-display {
     margin-top: -1.8em !important;
 }
 .agent-prefix::before {
-    content: '🐯';
+    content: '😎';
     filter: grayscale();
     padding: 0 4px;
 }
