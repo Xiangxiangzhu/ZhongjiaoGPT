@@ -127,6 +127,7 @@ def construct_index(
         documents = get_documents(file_src)
         logging.debug(i18n("构建索引中……"))
         if documents:
+            # todo: check doc proxy
             with retrieve_proxy():
                 index = FAISS.from_documents(documents, embeddings)
         else:

@@ -203,11 +203,27 @@ def retrieve_openai_api(api_key=None):
     os.environ["OPENAI_API_KEY"] = old_api_key
 
 
-# 处理代理：
-http_proxy = os.environ.get("HTTP_PROXY", "")
-https_proxy = os.environ.get("HTTPS_PROXY", "")
-http_proxy = config.get("http_proxy", http_proxy)
-https_proxy = config.get("https_proxy", https_proxy)
+class ProxyDescriptor:
+    def __init__(self, env_key, config_, default=''):
+        # 从配置字典获取代理设置，如果没有则从环境变量或默认值获取
+        self.proxy = config_.get(env_key, os.getenv(env_key.upper(), default))
+
+    def __get__(self, instance, owner):
+        # 访问代理时直接返回当前代理值
+        return self.proxy
+
+    def __str__(self):
+        # 当实例被当作字符串使用时，返回代理字符串
+        return self.proxy
+
+    def update_proxy(self, value):
+        # 允许外部更新代理
+        self.proxy = value
+
+
+# 使用已加载的配置初始化代理描述符实例
+http_proxy = ProxyDescriptor('http_proxy', config, '')
+https_proxy = ProxyDescriptor('https_proxy', config, '')
 
 # 重置系统变量，在不需要设置的时候不设置环境变量，以免引起全局代理报错
 os.environ["HTTP_PROXY"] = ""
@@ -219,46 +235,35 @@ local_embedding = config.get("local_embedding", False)  # 是否使用本地embe
 @contextmanager
 def retrieve_proxy(proxy=None):
     """
-    1, 如果proxy = NONE，设置环境变量，并返回最新设置的代理
-    2，如果proxy ！= NONE，更新当前的代理配置，但是不更新环境变量
+    1. 如果 proxy = None，设置环境变量为 None，并返回最新设置的代理
+    2. 如果 proxy != None，更新当前的代理配置，并更新环境变量
     """
-    global http_proxy, https_proxy
+    original_http_proxy = os.getenv("HTTP_PROXY")
+    original_https_proxy = os.getenv("HTTPS_PROXY")
+
     if proxy is not None:
-        http_proxy = proxy
-        https_proxy = proxy
-        yield http_proxy, https_proxy
+        # 设置新的代理
+        proxy = str(proxy)
+        os.environ["HTTP_PROXY"] = proxy
+        os.environ["HTTPS_PROXY"] = proxy
     else:
-        old_var = os.environ["HTTP_PROXY"], os.environ["HTTPS_PROXY"]
-        os.environ["HTTP_PROXY"] = http_proxy
-        os.environ["HTTPS_PROXY"] = https_proxy
-        yield http_proxy, https_proxy  # return new proxy
+        # 清除代理设置
+        os.environ["HTTP_PROXY"] = ''
+        os.environ["HTTPS_PROXY"] = ''
 
-        # return old proxy
-        os.environ["HTTP_PROXY"], os.environ["HTTPS_PROXY"] = old_var
+    try:
+        yield os.getenv("HTTP_PROXY"), os.getenv("HTTPS_PROXY")
+    finally:
+        # 还原原来的代理设置
+        if original_http_proxy is not None:
+            os.environ["HTTP_PROXY"] = original_http_proxy
+        else:
+            os.environ.pop("HTTP_PROXY", None)
 
-
-# @contextmanager
-# def my_retrieve_proxy(proxy=None):
-#     """
-#     1, 如果proxy != NONE，设置环境变量，并返回最新设置的代理
-#     2，如果proxy = NONE，不更新环境变量
-#     """
-#     if proxy is not None:
-#         old_var = os.environ["HTTP_PROXY"], os.environ["HTTPS_PROXY"]
-#         os.environ["HTTP_PROXY"] = proxy
-#         os.environ["HTTPS_PROXY"] = proxy
-#         yield proxy, proxy  # return new proxy
-#
-#         # return old proxy
-#         os.environ["HTTP_PROXY"], os.environ["HTTPS_PROXY"] = old_var
-#
-#         http_proxy = proxy
-#         https_proxy = proxy
-#         yield http_proxy, https_proxy
-#     else:
-#         http_proxy, https_proxy = os.environ["HTTP_PROXY"], os.environ["HTTPS_PROXY"]
-#
-#         yield http_proxy, https_proxy  # return new proxy
+        if original_https_proxy is not None:
+            os.environ["HTTPS_PROXY"] = original_https_proxy
+        else:
+            os.environ.pop("HTTPS_PROXY", None)
 
 
 # 处理latex options

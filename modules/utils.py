@@ -641,6 +641,7 @@ def get_geoip():
     def fetch_ip():
         global SERVER_GEO_IP_MSG, FETCHING_IP
         try:
+            # todo: check proxy here
             with retrieve_proxy():
                 response = requests.get("https://ipapi.co/json/", timeout=5)
             data = response.json()
