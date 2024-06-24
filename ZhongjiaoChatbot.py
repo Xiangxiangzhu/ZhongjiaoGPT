@@ -27,13 +27,8 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 gr.Chatbot._postprocess_chat_messages = postprocess_chat_messages
 gr.Chatbot.postprocess = postprocess
 
-
 # with open("web_assets/css/ChuanhuChat.css", "r", encoding="utf-8") as f:
 #     ChuanhuChatCSS = f.read()
-
-
-def create_new_model():
-    return get_model(model_name=MODELS[DEFAULT_MODEL], access_key=my_api_key)[0]
 
 
 with gr.Blocks(theme=small_and_beautiful_theme) as demo:
@@ -515,41 +510,6 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                             versions=versions_html()), elem_id="footer")
                         gr.Markdown(CHUANHU_DESCRIPTION, elem_id="description")
 
-            with gr.Box(elem_id="chuanhu-training"):
-                with gr.Row():
-                    gr.Markdown("## " + i18n("训练"))
-                    gr.HTML(get_html("close_btn.html").format(
-                        obj="box"), elem_classes="close-btn")
-                with gr.Tabs(elem_id="chuanhu-training-tabs"):
-                    with gr.Tab(label="OpenAI " + i18n("微调")):
-                        openai_train_status = gr.Markdown(label=i18n("训练状态"), value=i18n(
-                            "查看[使用介绍](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/使用教程#微调-gpt-35)"))
-
-                        with gr.Tab(label=i18n("准备数据集")):
-                            dataset_preview_json = gr.JSON(
-                                label=i18n("数据集预览"))
-                            dataset_selection = gr.Files(label=i18n("选择数据集"), file_types=[
-                                ".xlsx", ".jsonl"], file_count="single")
-                            upload_to_openai_btn = gr.Button(
-                                i18n("上传到OpenAI"), variant="primary", interactive=False)
-
-                        with gr.Tab(label=i18n("训练")):
-                            openai_ft_file_id = gr.Textbox(label=i18n(
-                                "文件ID"), value="", lines=1, placeholder=i18n("上传到 OpenAI 后自动填充"))
-                            openai_ft_suffix = gr.Textbox(label=i18n(
-                                "模型名称后缀"), value="", lines=1, placeholder=i18n("可选，用于区分不同的模型"))
-                            openai_train_epoch_slider = gr.Slider(label=i18n(
-                                "训练轮数（Epochs）"), minimum=1, maximum=100, value=3, step=1, interactive=True)
-                            openai_start_train_btn = gr.Button(
-                                i18n("开始训练"), variant="primary", interactive=False)
-
-                        with gr.Tab(label=i18n("状态")):
-                            openai_status_refresh_btn = gr.Button(i18n("刷新状态"))
-                            openai_cancel_all_jobs_btn = gr.Button(
-                                i18n("取消所有任务"))
-                            add_to_models_btn = gr.Button(
-                                i18n("添加训练好的模型到模型列表"), interactive=False)
-
             with gr.Box(elem_id="web-config", visible=False):
                 gr.HTML(get_html('web_config.html').format(
                     enableCheckUpdate_config=check_update,
@@ -560,8 +520,11 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
                     usingLatest_i18n=i18n("您使用的就是最新版！"),
                     updatingMsg_i18n=i18n("正在尝试更新..."),
                     updateSuccess_i18n=i18n("更新成功，请重启本程序"),
+                    # todo: add my link
+                    # updateFailure_i18n=i18n(
+                    #     "更新失败，请尝试[手动更新](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/使用教程#手动更新)"),
                     updateFailure_i18n=i18n(
-                        "更新失败，请尝试[手动更新](https://github.com/GaiZhenbiao/ChuanhuChatGPT/wiki/使用教程#手动更新)"),
+                        "更新失败，请尝试[手动更新](https://github.com"),
                     regenerate_i18n=i18n("重新生成"),
                     deleteRound_i18n=i18n("删除这轮问答"),
                     renameChat_i18n=i18n("重命名该对话"),
@@ -820,26 +783,6 @@ with gr.Blocks(theme=small_and_beautiful_theme) as demo:
         [user_name, historySearchTextbox],
         [historySelectList]
     )
-
-    # Train
-    dataset_selection.upload(handle_dataset_selection, dataset_selection, [
-        dataset_preview_json, upload_to_openai_btn, openai_train_status])
-    dataset_selection.clear(handle_dataset_clear, [], [
-        dataset_preview_json, upload_to_openai_btn])
-    upload_to_openai_btn.click(upload_to_openai, [dataset_selection], [
-        openai_ft_file_id, openai_train_status], show_progress=True)
-
-    openai_ft_file_id.change(lambda x: gr.update(interactive=True) if len(
-        x) > 0 else gr.update(interactive=False), [openai_ft_file_id], [openai_start_train_btn])
-    openai_start_train_btn.click(start_training, [
-        openai_ft_file_id, openai_ft_suffix, openai_train_epoch_slider], [openai_train_status])
-
-    openai_status_refresh_btn.click(get_training_status, [], [
-        openai_train_status, add_to_models_btn])
-    add_to_models_btn.click(add_to_models, [], [
-        model_select_dropdown, openai_train_status], show_progress=True)
-    openai_cancel_all_jobs_btn.click(
-        cancel_all_jobs, [], [openai_train_status], show_progress=True)
 
     # Advanced
     temperature_slider.input(

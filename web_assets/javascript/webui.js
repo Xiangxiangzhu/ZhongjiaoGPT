@@ -7,13 +7,13 @@ function openSettingBox() {
 
 }
 
-function openTrainingBox() {
-    chuanhuPopup.classList.add('showBox');
-    popupWrapper.classList.add('showBox');
-    trainingBox.classList.remove('hideBox');
-    settingBox.classList.add('hideBox');
-    showMask("box");
-}
+// function openTrainingBox() {
+//     chuanhuPopup.classList.add('showBox');
+//     popupWrapper.classList.add('showBox');
+//     trainingBox.classList.remove('hideBox');
+//     settingBox.classList.add('hideBox');
+//     showMask("box");
+// }
 
 function openChatMore() {
     chatbotArea.classList.add('show-chat-more');
