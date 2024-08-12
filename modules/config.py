@@ -34,6 +34,22 @@ __all__ = [
     "hfspaceflag",
 ]
 
+# add_module_paths
+import os
+import sys
+
+# 获取当前脚本所在的绝对路径
+current_script_path = os.path.abspath(__file__)
+
+# 获取当前脚本的父目录，即ZhongjiaoGPT目录
+project_root = os.path.dirname(current_script_path)
+
+# 计算semantic_router的路径
+submodule_path = os.path.join(project_root, 'models')
+
+# add path
+sys.path.append(submodule_path)
+
 # 添加一个统一的config文件，避免文件过多造成的疑惑（优先级最低）
 # 同时，也可以为后续支持自定义功能提供config的帮助
 if os.path.exists("config.json"):
@@ -80,6 +96,8 @@ if os.path.exists("auth.json"):
     os.rename("auth.json", "auth(deprecated).json")
     with open("config.json", "w", encoding='utf-8') as f:
         json.dump(config, f, indent=4, ensure_ascii=False)
+
+rpa_settings = config.get("rpa_settings", None)
 
 # 处理docker if we are running in Docker
 dockerflag = config.get("dockerflag", False)
