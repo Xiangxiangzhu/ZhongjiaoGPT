@@ -53,26 +53,28 @@ CHUANHU_DESCRIPTION = i18n(
     "由中交一公院 马小龙 孙铸 田赵明 研发<br />访问中交GPT的 [GitHub项目](https://github.com/) 下载最新版脚本")
 
 ONLINE_MODELS = [
-    "GPT3.5 Turbo",
-    "GPT4",
-    "Zhongjiao Agent",
-    "Simulation Agent"
+    "GPT-4o-Mini✅",
+    "GPT-4o✅",
+    "GPT-3.5-Turbo✅",
+    "GPT-4-Turbo✅",
+    "Zhongjiao Agent⚠️",
+    "Simulation Agent⚠️"
 ]
 
 LOCAL_MODELS = [
-    "Qwen2-72B-awq",
-    "Qwen2-72B-int4",
-    "Qwen1.5-72B",
-    "Qwen1.5-14B",
-    "Qwen1.5-7B",
-    "Yi-1.5-34B",
-    "Yi-34B",
-    "Yi-6B",
-    "Mistral-7B",
-    "Llama2-70B",
-    "Llama2-13B",
-    "Llama2-7B",
-    "chatglm3-6b",
+    "Qwen2-72B-awq❌",
+    "Qwen2-72B-int4✅",
+    "Qwen1.5-72B❌",
+    "Qwen1.5-14B❌",
+    "Qwen1.5-7B❌",
+    "Yi-1.5-34B❌",
+    "Yi-34B❌",
+    "Yi-6B❌",
+    "Mistral-7B❌",
+    "Llama2-70B❌",
+    "Llama2-13B❌",
+    "Llama2-7B❌",
+    "chatglm3-6b❌",
 ]
 
 # Additional metadata for online and local models
