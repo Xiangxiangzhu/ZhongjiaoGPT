@@ -1,0 +1,24 @@
+# 忽略版本控制目录
+.git/
+.svn/
+
+# 忽略所有 Markdown 文件
+*.md
+
+# 忽略 Node.js 的依赖目录
+node_modules/
+
+# 忽略构建产生的临时文件
+tmp/
+temp/
+
+# 忽略日志文件
+*.log
+
+# 忽略 Dockerfile 和 .dockerignore 文件本身
+Dockerfile
+.dockerignore
+
+# 忽略特定的配置文件
+config.env
+
