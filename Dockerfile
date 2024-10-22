@@ -5,7 +5,7 @@ FROM christtzm/tzm_dev:conda
 SHELL ["/usr/bin/zsh", "-c"]
 
 # 安装开发组件及conda环境
-RUN /root/miniconda3/bin/conda create -n zhongjiao python=3.9 -y
+RUN /root/miniconda3/bin/conda create -n zhongjiao python=3.11 -y
 
 # RUN apt-get update \
 #     && apt-get install -y build-essential \
