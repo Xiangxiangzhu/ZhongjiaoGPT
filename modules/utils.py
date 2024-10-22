@@ -858,7 +858,7 @@ def beautify_err_msg(err_msg):
 
 def auth_from_conf(username, password):
     try:
-        with open("config.json", encoding="utf-8") as f:
+        with open("my_configs/config.json", encoding="utf-8") as f:
             conf = json.load(f)
         usernames, passwords = [i[0] for i in conf["users"]], [
             i[1] for i in conf["users"]
@@ -949,7 +949,7 @@ def generate_result_string(config_item, config_value):
 
 
 class SetupWizard:
-    def __init__(self, file_path="config.json") -> None:
+    def __init__(self, file_path="my_configs/config.json") -> None:
         self.config = {}
         self.file_path = file_path
         language = input(
@@ -960,6 +960,7 @@ class SetupWizard:
             print(
                 "你没有输入有效的语言代码，将使用默认语言中文(zh_CN)\nYou did not enter a valid language code, the default language Chinese(zh_CN) will be used.")
         print(
+            # TODO: need to check here
             i18n("正在进行首次设置，请按照提示进行配置，配置将会被保存在")
             + colorama.Fore.GREEN
             + " config.json "
@@ -967,6 +968,7 @@ class SetupWizard:
             + i18n("中。")
         )
         print(
+            # TODO: need to check here
             i18n("在")
             + colorama.Fore.YELLOW
             + " example_config.json "
@@ -1072,7 +1074,7 @@ class SetupWizard:
 
 
 def setup_wizard():
-    if not os.path.exists("config.json"):
+    if not os.path.exists("my_configs/config.json"):
         wizard = SetupWizard()
         flag = False
         # 设置openai_api_key。

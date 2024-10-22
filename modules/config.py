@@ -52,8 +52,8 @@ sys.path.append(submodule_path)
 
 # 添加一个统一的config文件，避免文件过多造成的疑惑（优先级最低）
 # 同时，也可以为后续支持自定义功能提供config的帮助
-if os.path.exists("config.json"):
-    with open("config.json", "r", encoding='utf-8') as f:
+if os.path.exists("my_configs/config.json"):
+    with open("my_configs/config.json", "r", encoding='utf-8') as f:
         config = json.load(f)
 else:
     config = {}
@@ -78,7 +78,7 @@ if os.path.exists("api_key.txt"):
     with open("api_key.txt", "r", encoding="utf-8") as f:
         config["openai_api_key"] = f.read().strip()
     os.rename("api_key.txt", "api_key(deprecated).txt")
-    with open("config.json", "w", encoding='utf-8') as f:
+    with open("my_configs/config.json", "w", encoding='utf-8') as f:
         json.dump(config, f, indent=4, ensure_ascii=False)
 
 if os.path.exists("auth.json"):
@@ -94,7 +94,7 @@ if os.path.exists("auth.json"):
                 sys.exit(1)
     config["users"] = auth_list
     os.rename("auth.json", "auth(deprecated).json")
-    with open("config.json", "w", encoding='utf-8') as f:
+    with open("my_configs/config.json", "w", encoding='utf-8') as f:
         json.dump(config, f, indent=4, ensure_ascii=False)
 
 rpa_settings = config.get("rpa_settings", None)

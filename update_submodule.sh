@@ -16,6 +16,6 @@ git add modules/models || { echo "Failed to add submodule"; exit 1; }
 git commit -m "Update submodule to latest commit" || { echo "Failed to commit changes"; exit 1; }
 
 ## 推送主项目的更改
-#git push origin main || { echo "Failed to push changes to remote"; exit 1; }
+#git push origin main || { echo "Failed to push changes to remote"; exit 1; }0-
 
 echo "Submodule changes synced successfully!"
